@@ -1,0 +1,13 @@
+"population","model_config","validation","pop_IR","FDR_plsda","FNR_plsda","FDR_svm","FNR_svm","FDR_rf","FNR_rf"
+1,"population-specific","repeated-split",0.08,0.221,0.25,0.211,0.345,0.306,0.738
+2,"population-specific","repeated-split",0.13,0.076,0.049,0.111,0.147,0.232,0.64
+3,"population-specific","repeated-split",0.1,0.047,0.012,0.011,0.117,0.088,0.365
+4,"population-specific","repeated-split",0.11,0.102,0.085,0.019,0.18,0.075,0.735
+5,"population-specific","repeated-split",0.1,0.171,0.2,0.267,0.533,0.284,0.948
+6,"population-specific","repeated-split",0.04,0.211,0.66,0.267,0.8,0.178,0.807
+7,"population-specific","repeated-split",0.03,0,0.79,0.058,0.62,0.047,0.66
+8,"population-specific","repeated-split",0.08,0.278,0.485,0.26,0.46,0.255,0.408
+9,"population-specific","repeated-split",0.08,0.511,0.64,0.406,0.853,0.12,0.973
+10,"population-specific","repeated-split",0.09,0.535,0.748,0.486,0.82,0.296,0.95
+11,"population-specific","repeated-split",0.08,0.53,0.708,0.543,0.735,0.38,0.795
+12,"population-specific","repeated-split",0.12,0.36,0.578,0.342,0.58,0.402,0.743

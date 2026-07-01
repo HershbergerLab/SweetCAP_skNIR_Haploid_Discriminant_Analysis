@@ -436,7 +436,7 @@ stats_table
 # =============================================================================
 # PART 2: All Figures for the skNIR Manuscript except Figure 3 (Figure 3 is in R Script1)
 # =============================================================================
-
+# Must have "Arial" font installed on the system for running this
 theme_set(
   theme_bw(base_family = "Arial")
 )
@@ -550,7 +550,6 @@ fig2
 
 ggsave("Figure2.png", fig2, width = 12, height = 5, dpi = 600, bg = "white")
 
-
 # Supplementary Fig. 1: Per-population MEAN spectra
 mean_pop_all <- dat_spec %>%
   dplyr::select(population, dna.score.final, all_of(spec_cols)) %>%
@@ -640,8 +639,8 @@ delta_oil_data <- delta_oil_data %>%
   mutate(
     x_label = paste0(
       population,
-      "<br><b>", Inducer, "</b>",
-      "<br><span style='font-size:11pt;'>", Donor, "</span>"
+      "<br><span style='font-size:11pt;'>", Donor, "</span>",
+      "<br><b>", Inducer, "</b>"
     )
   )
 
@@ -707,23 +706,12 @@ Inducer_plot <- ggplot(
       size = 16,
       face = "bold"
     ),
-    
-    axis.title.x = element_text(
-      margin = margin(t = 12)
-    ),
-    
-    axis.title.y = element_text(
-      margin = margin(r = 12)
-    ),
-    
     axis.ticks = element_line(
       colour = "black",
       linewidth = 0.8
     ),
     
-    axis.ticks.length = unit(0.2, "cm"),
-    
-    plot.margin = margin(10, 10, 10, 10)
+    axis.ticks.length = unit(0.2, "cm")
   )
 
 Inducer_plot

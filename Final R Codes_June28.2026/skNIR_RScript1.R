@@ -3,7 +3,6 @@
 # Paper: Single-kernel near-infrared spectroscopy enables haploid kernel sorting in field and sweet corn using high-oil haploid inducers across diverse donor–inducer combinations
 # =============================================================================
 # ORGANIZATION:
-#   PART 0: Libraries, data loading, and shared setup
 #   PART 1: Multivariate functions for the three methods (PLS-DA, SVM, RF)
 #   PART 2: Oil-based haploid sorting methods
 #   PART 3: Multivariate haploid sorting methods
@@ -27,7 +26,7 @@ set.seed(MASTER_SEED)
 cat("Global reproducibility seed:", MASTER_SEED, "\n")
 
 # Data loading 
-dat <- read.csv("/home/sumans/26June_skNIR_finalcheck/Data_skNIR_Manuscript_June27.2026.csv")
+dat <- read.csv("/home/27June_skNIR_finalcheck/Data_skNIR_Manuscript.csv")
 
 # Spectral columns (940-1640 nm, 1 nm step)
 spec_cols <- paste0("X", 940:1640)
@@ -38,7 +37,7 @@ dat[, spec_cols] <- pretreat_spectra(
   pretreatment = 2
 )
 
-# Haploid induction rates (HIRs) for each population
+# Haploid induction rates (HIRs) for each population (expressing HIR(%) as a decimal)
 induction_rates <- data.frame(
   population = as.character(1:12),
   IR = c(0.08, 0.13, 0.10, 0.11, 0.10, 0.04, 0.03, 0.08, 0.08, 0.09, 0.08, 0.12),
@@ -1216,7 +1215,6 @@ make_figure3 <- function(oil_results_file = "oil_results_v5.RData") {
 # =========================================================
 # RUN ALL ANALYSES
 # =========================================================
-
 
 cat("\nRunning oil sorting analysis...\n")
 oil_results <- run_oil_analysis()

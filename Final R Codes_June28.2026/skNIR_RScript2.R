@@ -28,7 +28,7 @@ library(ggrepel)
 library(ggtext)
 
 # Upload data
-dat <- read.csv("/home/sumans/26June_skNIR_finalcheck/Data_skNIR_Manuscript_June27.2026.csv")
+dat <- read.csv("/home/27June_skNIR_finalcheck/Data_skNIR_Manuscript.csv")
 
 # Keeping only kernels with final classification scores used in analysis
 dat_model <- dat %>%
@@ -434,7 +434,7 @@ stats_table <- seed_class %>%
 stats_table
 
 # =============================================================================
-# PART 2: All Figures for the skNIR Manuscript except Figure 3 (Figure 3 is in R Script1)
+# PART 2: All Figures for the skNIR Manuscript except Figure 3 (Figure 3 is in RScript1)
 # =============================================================================
 # Must have "Arial" font installed on the system for running this
 theme_set(
@@ -615,7 +615,6 @@ supp_fig1 <- ggplot(
     legend.position = "bottom"
   )
 
-
 supp_fig1
 
 ggsave("SupplementaryFig1.png", supp_fig1, width = 16, height = 14, dpi = 600)
@@ -691,17 +690,14 @@ Inducer_plot <- ggplot(
     ),
     
     axis.line = element_blank(),
-    
     axis.text.x = ggtext::element_markdown(
       size = 12,
       colour = "black"
     ),
-    
     axis.text.y = element_text(
       size = 14,
       colour = "black"
     ),
-    
     axis.title = element_text(
       size = 16,
       face = "bold"
@@ -710,7 +706,6 @@ Inducer_plot <- ggplot(
       colour = "black",
       linewidth = 0.8
     ),
-    
     axis.ticks.length = unit(0.2, "cm")
   )
 
@@ -722,30 +717,39 @@ ggsave("Figure4.png", plot = Inducer_plot, dpi = 600, width = 10, height = 8, un
 # Figure 5: Correlation of Delta Oil with FDR and FNR from General SVM Model
 #-----------------------------------------------------------------------------
 # Adding FDR and FNR values manually from Table 5 (General SVM Multivariate Model)
-manual_data <- data.frame(
-  
-  population = 1:12,
-  
-  FDR = c(0.15, 0.18, 0.02, 0.43, 0.48, 0.50, 0.00, 0.11, 0.64, 0.77, 0.55, 0.02),
-  
-  FNR = c(0.11, 0.39, 0.44, 0.21, 0.14, 0.37, 0.21, 0.67, 0.67, 0.30, 0.40, 0.69)
+
+manual_data <- data.frame(population = 1:12,
+                          
+FDR = c(0.15, 0.18, 0.02, 0.43, 0.48, 0.50, 0.00, 0.11, 0.64, 0.77, 0.55, 0.02),
+                          
+FNR = c(0.11, 0.39, 0.44, 0.21, 0.14, 0.37, 0.21, 0.67, 0.67, 0.30, 0.40, 0.69)
 )
 
 fig5_data <- delta_oil %>%
   left_join(manual_data, by = "population")
 
-r_fdr <- cor(fig5_data$delta_oil, fig5_data$FDR)
+r_fdr <- cor(
+  fig5_data$delta_oil,
+  fig5_data$FDR,
+  method = "pearson"
+)
 
 p_fdr <- cor.test(
   fig5_data$delta_oil,
-  fig5_data$FDR
+  fig5_data$FDR,
+  method = "pearson"
 )$p.value
 
-r_fnr <- cor(fig5_data$delta_oil, fig5_data$FNR)
+r_fnr <- cor(
+  fig5_data$delta_oil,
+  fig5_data$FNR,
+  method = "pearson"
+)
 
 p_fnr <- cor.test(
   fig5_data$delta_oil,
-  fig5_data$FNR
+  fig5_data$FNR,
+  method = "pearson"
 )$p.value
 
 
@@ -757,7 +761,6 @@ p1 <- ggplot(
     y = FDR
   )
 ) +
-  
   geom_smooth(
     method = "lm",
     se = TRUE,
@@ -769,33 +772,32 @@ p1 <- ggplot(
     size = 5,
     color = "darkorange"
   ) +
-
-geom_text_repel(
-  aes(label = population),
-  size = 5,
-  box.padding = 0.4,
-  point.padding = 0.3,
-  max.overlaps = Inf
-) +
   
+  geom_text_repel(
+    aes(label = population),
+    size = 5,
+    box.padding = 0.4,
+    point.padding = 0.3,
+    max.overlaps = Inf
+  ) +
   geom_hline(
     yintercept = 0.25,
     linetype = "dashed",
     color = "black"
   ) +
-  
   annotate(
     "text",
     x = max(fig5_data$delta_oil),
     y = 0.95,
-    label = paste0(
-      "r = ", round(r_fdr, 2),
-      "\np = ", round(p_fdr, 3)
+    label = bquote(
+      atop(
+        italic(r) == .(round(r_fdr, 2)),
+        italic(p) == .(round(p_fdr, 3))
+      )
     ),
     hjust = 1,
-    size = 4
+    size = 4.5
   ) +
-  
   scale_y_continuous(
     limits = c(0, 1),
     breaks = seq(0, 1, 0.25)
@@ -827,11 +829,11 @@ geom_text_repel(
     axis.line = element_blank(),
     axis.text.x = element_blank(),
     axis.text = element_text(
-      size = 12,
+      size = 14,
       color = "black"
     ),
     axis.title = element_text(
-      size = 14,
+      size = 16,
       face = "bold"
     )
   )
@@ -844,49 +846,46 @@ p2 <- ggplot(
     y = FNR
   )
 ) +
-  
   geom_smooth(
     method = "lm",
+    formula = y ~ x,
     se = TRUE,
     color = "black",
     fill = "lightgrey"
   ) +
-  
   geom_point(
     size = 5,
     color = "darkorange"
   ) +
-
-geom_text_repel(
-  aes(label = population),
-  size = 5,
-  box.padding = 0.4,
-  point.padding = 0.3,
-  max.overlaps = Inf
-) +
+  geom_text_repel(
+    aes(label = population),
+    size = 5,
+    box.padding = 0.4,
+    point.padding = 0.3,
+    max.overlaps = Inf
+  ) +
   geom_hline(
     yintercept = 0.50,
     linetype = "dashed",
     color = "black"
   ) +
-  
   annotate(
     "text",
     x = max(fig5_data$delta_oil),
     y = 0.95,
-    label = paste0(
-      "r = ", round(r_fnr, 2),
-      "\np = ", round(p_fnr, 3)
+    label = bquote(
+      atop(
+        italic(r) == .(round(r_fnr, 2)),
+        italic(p) == .(round(p_fnr, 3))
+      )
     ),
     hjust = 1,
-    size = 4
+    size = 4.5
   ) +
-  
   scale_y_continuous(
     limits = c(0, 1),
     breaks = seq(0, 1, 0.25)
   ) +
-  
   labs(
     x = expression(bold(Delta~Oil~"(%)")),
     y = "FNR"
@@ -912,15 +911,15 @@ geom_text_repel(
     ),
     axis.line = element_blank(),
     axis.text.x = element_text(
-      size = 12,
+      size = 14,
       color = "black"
     ),
     axis.text = element_text(
-      size = 12,
+      size = 14,
       color = "black"
     ),
     axis.title = element_text(
-      size = 14,
+      size = 16,
       face = "bold"
     )
   )
@@ -933,7 +932,7 @@ fig5
 ggsave("Figure5.png", plot = fig5, dpi = 600, width = 10, height = 8, units = "in")
 
 # --------------------------------------------------
-# Supplementary Figure 2 (NMR vs. skNIR Oil Content)
+# Supplementary Figure 2 (NMR-measured Oil Content vs. skNIR-predicted Oil Content)
 # --------------------------------------------------
 # Create annotation labels
 stats_table <- stats_table %>%

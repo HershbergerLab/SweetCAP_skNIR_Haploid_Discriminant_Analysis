@@ -37,3 +37,4 @@ https://github.com/HershbergerLab/SweetCAP_skNIR_Haploid_Discriminant_Analysis
 
 Project Start Date: August 2024
 Project PI: Dr. Jenna Hershberger
+Project Lead: Suman Sharma

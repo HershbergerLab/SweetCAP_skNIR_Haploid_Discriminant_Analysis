@@ -1,5 +1,7 @@
 # SweetCAP_skNIR_Haploid_Discriminant_Analysis
 
+**Our Research Paper entitled "Single-kernel near-infrared spectroscopy enables haploid kernel sorting in field and sweet corn using high-oil haploid inducers across diverse donor-inducer combinations" has been accpeted for publication in _Theoretical and Applied Genetics_. **
+
 **Description of the data and file structure**
 
 Rapid and accurate haploid kernel identification remains a major bottleneck in maize doubled haploid production, particularly in sweet corn germplasm where the widely used R1-nj kernel color marker is frequently suppressed, resulting in unreliable visual haploid sorting. To address this challenge, we evaluated an automated single-kernel near-infrared (skNIR) spectroscopy-based sorting system across 12 induction populations derived from two field corn and two sweet corn donor backgrounds and four high-oil haploid inducer lines. We compared two skNIR-based haploid sorting approaches: predicted oil content-based methods and spectra-based multivariate classification methods.
